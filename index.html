@@ -1,0 +1,499 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="20">
+    <meta name="author" content="ALI"> 
+    <title>Doctor's Clinic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        *{
+            user-select: none;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f2f4f7, #dde4e8);
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-out;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Logo Styling */
+        .logo {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+            /* Adjust the size of the logo */
+        .logo img {
+            width: 100px;
+            height: 100; 
+            border-radius: 50%;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+
+        /* Hero Image */
+        .hero {
+            background: url("https://png.pngtree.com/background/20231030/original/pngtree-medical-team-in-cartoon-style-a-group-of-doctors-specialists-and-picture-image_5809522.jpg") no-repeat center center/cover;
+            height: 250px;
+    
+            margin-bottom: 10px;
+            position: relative;
+            color: white;
+            background-size:contain;
+            margin-top:15px;
+        }
+
+        .hero h2 {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-size: 2em;
+            color: green;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #800040;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 12px 0;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 40px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 25px;
+            padding: 12px 20px;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #4CAF50;
+            transform: scale(1.1);
+        }
+
+        /* Login and Sign Up Buttons */
+        .auth-buttons a {
+            color: white;
+            background-color: #4CAF50;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-left: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .auth-buttons a:hover {
+            background-color: #45a049;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 20px;
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        section p {
+            font-size: 1.2em;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* About Section */
+        .about, .services, .appointment {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            margin-bottom: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .about:hover, .services:hover, .appointment:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Services Section */
+        .services ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .services ul li {
+            font-size: 1.2em;
+            margin: 15px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .services ul li::before {
+            content: "✔";
+            color: #4CAF50;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.5em;
+        }
+
+        /* Appointment Form */
+        form input, form textarea, form select {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1.1em;
+            transition: border-color 0.3s ease;
+        }
+
+        form input:focus, form textarea:focus, form select:focus {
+            border-color: #4CAF50;
+        }
+
+        form button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: green;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer .social-links a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.5em;
+            transition: color 0.3s ease;
+        }
+
+        footer .social-links a:hover {
+            color: #4CAF50;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* FAQ Section */
+        .faq {
+            background-color: #f9f9f9;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .faq h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .faq ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .faq ul li {
+            font-size: 1.2em;
+            margin: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .faq ul li::before {
+            content: "Q:";
+            color: #4CAF50;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.5em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            header .logo img {
+                width: 40px; /* Adjust the logo size on small screens */
+            }
+
+            nav a {
+                font-size: 16px;
+            }
+
+            section h2 {
+                font-size: 2em;
+            }
+        }
+
+        
+    /* Help Button Styling */
+    .help-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+        text-align: center;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    /* Help Popup Styling */
+    .help-popup {
+        display: none;
+        position: fixed;
+        bottom: 100px;
+        right: 20px;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        max-width: 300px;
+        z-index: 1001;
+    }
+
+    .help-popup h3 {
+        margin-top: 0;
+        color: #333;
+    }
+
+    .help-popup input {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+    .help-popup button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 6px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .help-popup p {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #555;
+    }
+    a{
+        text-decoration: none;
+      
+    }
+</style>
+
+<!-- Add this JavaScript at the end of the body -->
+<script>
+    const helpButton = document.getElementById("help-button");
+    const helpPopup = document.getElementById("help-popup");
+    const submitButton = document.getElementById("submit-question");
+    const userQuestion = document.getElementById("user-question");
+    const helpResponse = document.getElementById("help-response");
+
+    // Toggle help popup visibility
+    helpButton.addEventListener("click", () => {
+        helpPopup.style.display = helpPopup.style.display === "block" ? "none" : "block";
+    });
+
+    // Handle question submission
+    submitButton.addEventListener("click", () => {
+        const question = userQuestion.value.trim();
+        if (question) {
+            // Provide a simple response or logic to process the question
+            helpResponse.textContent = "Thank you for your question! We will get back to you soon.";
+        } else {
+            helpResponse.textContent = "Please enter a valid question.";
+        }
+        userQuestion.value = ""; // Clear input field
+    });
+</script>
+    
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <!-- Logo -->
+        <div class="logo">
+            <img src="https://img.freepik.com/premium-vector/hospital-logo-vector_1277164-14144.jpg" alt="Doctor's Clinic Logo"> <!-- Replace with your logo path -->
+        </div>
+        <H1>Doctor's Clinic</H1>
+    </header>
+
+    <!-- Hero Image Section -->
+    <div class="hero">
+        <h2>We Care About Your Health</h2>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#appointment">Appointment</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="auth-buttons">
+            <a href="login.html">Login</a>
+            <a href="signup.html">Sign Up</a>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2>About Us</h2>
+        <p>Welcome to Doctor's Clinic. We offer expert healthcare services to ensure you feel your best. Our team of professional doctors are ready to assist you with a range of medical treatments and consultations.</p>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h2>Our Services</h2>
+        <ul>
+            <li>General Consultation</li>
+            <li>Pediatrics</li>
+            <li>Cardiology</li>
+            <li>Orthopedics</li>
+            <li>Emergency Care</li>
+        </ul>
+    </section>
+
+    <!-- Appointment Section -->
+    <section id="appointment" class="appointment">
+        <h2>Book an Appointment</h2>
+        <form action="appointment_submission.php" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <input type="tel" name="phone" placeholder="Your Phone Number" required>
+            <input type="date" name="appointment_date" required>
+            
+            <!-- Doctor Dropdown List -->
+            <select name="doctor" required>
+                <option value="">Select Doctor</option>
+                <option value="Dr. Smith">Dr. Smith</option>
+                <option value="Dr. Johnson">Dr. Johnson</option>
+                <option value="Dr. Lee">Dr. Lee</option>
+                <option value="Dr. Patel">Dr. Patel</option>
+            </select>
+            
+            <textarea name="message" placeholder="Additional Information" rows="4"></textarea>
+                <a href="appoint.html">
+            <button type="submit">Book Appointment </a></button>
+        </form>
+        <div class="message"></div>
+    </section>
+
+    <button id="help-button" class="help-button">?</button>
+    <div id="help-popup" class="help-popup">
+        <h3>Need Help?</h3>
+        <input type="text" id="user-question" placeholder="Ask your question here..." />
+       <button id="submit-question">Submit </button>
+        <p id="help-response"></p>
+    </div>
+
+</address>
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Doctor's Clinic</p>
+        <div class="social-links">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">Twitter</a>
+        </div>
+    </footer>
+
+</body>
+</html>
