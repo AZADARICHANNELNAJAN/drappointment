@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup - Doctor's Clinic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        * {
+            user-select: none;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #71eeff, #00d2ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Wrapper */
+        .wrapper {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            max-width: 900px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* Signup Container */
+        .signup-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            max-width: 400px;
+            width: 100%;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Title */
+        .signup-container h2 {
+            font-size: 2.4em;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* Input Fields */
+        .signup-container input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+
+        .signup-container input:focus {
+            border-color: #00d2ff;
+            box-shadow: 0 0 8px rgba(0, 210, 255, 0.4);
+        }
+
+        /* Submit Button */
+        .signup-container button {
+            width: 100%;
+            padding: 15px;
+            background: #3a7bd5;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .signup-container button:hover {
+            background: #00d2ff;
+            transform: scale(1.05);
+        }
+
+        /* Message */
+        .message {
+            margin-top: 15px;
+            font-size: 1em;
+            text-align: center;
+            color: red;
+            display: none;
+        }
+
+        .success-message {
+            color: green;
+        }
+
+        /* Smiling Character */
+        .character {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .character .face {
+            width: 100px;
+            height: 100px;
+            background: #ffc107;
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .character .eyes {
+            position: absolute;
+            top: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+        }
+
+        .character .eye {
+            width: 15px;
+            height: 15px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        .character .smile,
+        .character .neutral {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            width: 50px;
+            height: 25px;
+            transform: translateX(-50%);
+        }
+
+        .character .smile {
+            border: 3px solid #333;
+            border-top: none;
+            border-radius: 0 0 50px 50px;
+        }
+
+        .character .neutral {
+            width: 40px;
+            height: 4px;
+            background: #333;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .wrapper {
+                flex-direction: column;
+            }
+            .signup-container {
+                padding: 30px;
+            }
+            .signup-container h2 {
+                font-size: 2em;
+            }
+            .signup-container input, 
+            .signup-container button {
+                font-size: 0.9em;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <form>
+    <div class="wrapper">
+        <!-- Signup Box -->
+        <div class="signup-container">
+            <h2>Create Your Account</h2>
+            <form id="signupForm" method="post">
+                <input type="text" id="username" name="username" placeholder="Username" required maxlength="5" minlength="5" >
+                <input type="email" id="email" name="email" placeholder="Email" required>
+                <input type="password" id="password" name="password" placeholder="Password" minlength="5" maxlength="8" required>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+                <button type="submit">Sign Up</button>
+            </form>
+            <div id="responseMessage" class="message"></div>
+        </div>
+
+        <!-- Character -->
+        <div class="character">
+            <div class="face">
+                <div class="eyes">
+                    <div class="eye"></div>
+                    <div class="eye"></div>
+                </div>
+                <div class="smile" id="smile"></div>
+                <div class="neutral" id="neutral" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+</form>
+    <script>
+        const form = document.getElementById("signupForm");
+        const responseMessage = document.getElementById("responseMessage");
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const username = document.getElementById("username").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (!username || !email || !password || !confirmPassword) {
+                responseMessage.textContent = "Please fill in all fields.";
+                responseMessage.style.display = "block";
+                responseMessage.classList.remove("success-message");
+            } else if (password !== confirmPassword) {
+                responseMessage.textContent = "Passwords do not match.";
+                responseMessage.style.display = "block";
+                responseMessage.classList.remove("success-message");
+            } else {
+                responseMessage.textContent = "Signup successful!";
+                responseMessage.style.display = "block";
+                responseMessage.classList.add("success-message");
+
+                setTimeout(() => {
+                    window.location.href = "login.html";
+                }, 1500);
+            }
+        });
+
+        // Smile and Neutral Animation
+        const smile = document.getElementById("smile");
+        const neutral = document.getElementById("neutral");
+        setInterval(() => {
+            if (smile.style.display === "none") {
+                smile.style.display = "block";
+                neutral.style.display = "none";
+            } else {
+                smile.style.display = "none";
+                neutral.style.display = "block";
+            }
+        }, 1000);
+
+        // Speech Feature
+        function speakMessage() {
+            const message = "Sign up fast my friend, I am waiting for your signup!";
+            const speech = new SpeechSynthesisUtterance(message);
+            speech.lang = "en-US";
+            speech.volume = 1;
+            speech.pitch = 1;
+            speech.rate = 1;
+            window.speechSynthesis.speak(speech);
+        }
+
+        setInterval(speakMessage, 5000); // Speak every 5 seconds
+    </script>
+</body>
+</html>
